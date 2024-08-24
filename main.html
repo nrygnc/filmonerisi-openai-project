@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Öneri Sistemi</title>
+    <style>
+        body {
+            background-color: #1c1e21;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            text-align: center;
+            padding: 20px;
+            font-size: 3em;
+            color: #ffcc00;
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus {
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .button {
+            background-color: #ffcc00;
+            color: #1c1e21;
+            padding: 15px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #e6b800;
+        }
+
+        .recommendations {
+            text-align: center;
+            margin: 40px auto;
+            width: 80%;
+            background-color: #282c34;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title">🎬 Film Öneri Sistemi</div>
+
+    <div class="input-container">
+        <input type="text" id="genres" placeholder="Sevdiğiniz film türlerini girin (örneğin: Aksiyon, Komedi, Drama)">
+        <input type="text" id="favorite_movies" placeholder="En sevdiğiniz 3 filmi girin (örneğin: Inception, The Godfather, The Dark Knight)">
+        <button class="button" onclick="getRecommendations()">Öneri Al</button>
+    </div>
+
+    <div class="recommendations" id="recommendations">
+        <h3>🍿 Sizin İçin Film Önerileri:</h3>
+        <!-- Öneriler burada görüntülenecek -->
+    </div>
+
+    <div class="footer">
+        📽️ Hazırlayan: [Nuray Göncü] | 2024
+    </div>
+
+    <script>
+        function getRecommendations() {
+            // Kullanıcıdan alınan türler ve favori filmler
+            const genres = document.getElementById('genres').value;
+            const favoriteMovies = document.getElementById('favorite_movies').value;
+
+            if (genres === '' || favoriteMovies === '') {
+                alert('Lütfen tüm alanları doldurun!');
+                return;
+            }
+
+            // Girdi verilerini al ve önerileri oluştur
+            const genresList = genres.split(',').map(item => item.trim());
+            const favoriteMoviesList = favoriteMovies.split(',').map(item => item.trim());
+
+            // Dummy recommendation (Gerçek API çağrısını burada kullanacaksınız)
+            const recommendations = [
+                { name: "Inception", genre: "Sci-Fi", description: "A thief who steals corporate secrets through dream-sharing technology." },
+                { name: "The Godfather", genre: "Crime", description: "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son." },
+                { name: "The Dark Knight", genre: "Action", description: "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham." },
+                { name: "Pulp Fiction", genre: "Crime, Drama", description: "The lives of two mob hitmen, a boxer, a gangster, and his wife intertwine in four tales of violence and redemption." },
+                { name: "The Shawshank Redemption", genre: "Drama", description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency." }
+            ];
+
+            // Öneriler HTML'e eklenir
+            const recommendationsDiv = document.getElementById('recommendations');
+            recommendationsDiv.innerHTML = `<h3>🍿 Sizin İçin Film Önerileri:</h3>`; // Temizle ve başlığı ekle
+            recommendations.forEach(rec => {
+                recommendationsDiv.innerHTML += `<p><strong>${rec.name}</strong> (${rec.genre}): ${rec.description}</p>`;
+            });
+        }
+    </script>
+
+</body>
+</html>
