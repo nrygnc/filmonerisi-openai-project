@@ -1,8 +1,3 @@
-import openai
-import streamlit as st
-
-# OpenAI API anahtarınızı buraya yapıştırın
-openai.api_key = "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"
 
 import openai
 import streamlit as st
